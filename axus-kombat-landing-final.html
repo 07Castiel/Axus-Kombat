@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ============================================================
+    TÍTULO DA PÁGINA
+    Aparece na aba do navegador e nos resultados do Google.
+    Para alterar: mude o texto entre <title> e </title>
+  ============================================================ -->
+  <title>Axus Kombat — Sistema de Gestão para Academias de Artes Marciais</title>
+
+  <!-- ============================================================
+    SEO — DESCRIÇÃO PARA O GOOGLE
+    Texto que aparece abaixo do título nos resultados de busca.
+    Máximo recomendado: 160 caracteres.
+  ============================================================ -->
+  <meta name="description" content="Gerencie alunos, mensalidades, presenças e graduações em um único lugar. Teste 14 dias grátis no Plano Pro — sem cartão de crédito.">
+
+  <!-- ============================================================
+    OPEN GRAPH — PREVIEW AO COMPARTILHAR NO WHATSAPP, INSTAGRAM E LINKEDIN
+    Quando alguém compartilhar o link, essas informações formam
+    o "cartão" que aparece na conversa.
+
+    IMPORTANTE: substitua os valores abaixo antes de publicar:
+      - og:url       → endereço real do seu site
+      - og:image     → link de uma imagem 1200×630px hospedada no seu servidor
+                       (se não tiver ainda, crie uma imagem no Canva e faça upload)
+  ============================================================ -->
+  <meta property="og:type"         content="website">
+  <meta property="og:url"          content="https://SEU-DOMINIO-AQUI.com.br">
+  <meta property="og:title"        content="Axus Kombat — Sistema de Gestão para Academias de Artes Marciais">
+  <meta property="og:description"  content="Pare de perder dinheiro com planilhas. Gerencie alunos, cobranças e graduações em um único lugar. Teste 14 dias grátis, sem cartão.">
+  <meta property="og:image"        content="https://SEU-DOMINIO-AQUI.com.br/og-image.png">
+  <meta property="og:image:width"  content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale"       content="pt_BR">
+  <meta property="og:site_name"    content="Axus Kombat">
+
+  <!-- Twitter / X Card (funciona igual ao Open Graph no X) -->
+  <meta name="twitter:card"        content="summary_large_image">
+  <meta name="twitter:title"       content="Axus Kombat — Gestão para Academias de Artes Marciais">
+  <meta name="twitter:description" content="Gerencie alunos, cobranças e graduações em um único lugar. 14 dias grátis.">
+  <meta name="twitter:image"       content="https://SEU-DOMINIO-AQUI.com.br/og-image.png">
+
+  <!-- ============================================================
+    FONTES
+    Cinzel: usada em títulos e logo (estilo clássico / combate)
+    Rajdhani: usada em textos, preços e botões (moderna e legível)
+    Não altere essa linha — ela carrega as fontes do Google Fonts.
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+      RESET — Zera margens e paddings padrão de todos os elementos
+      Não precisa mexer aqui.
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ============================================================
+      VARIÁVEIS DE COR E ESTILO GLOBAL
+      Para mudar as cores do site inteiro, altere os valores aqui.
+      --red-dark  : cor principal dos botões e destaques (vermelho profundo)
+      --red       : vermelho mais vivo para ícones e textos de destaque
+      --red-hover : cor do botão quando o mouse está em cima
+      --bg        : cor de fundo geral da página
+      --silver    : cor dos textos secundários (cinza claro)
+      --silver-dk : cor dos textos de apoio (cinza escuro)
+      --white     : branco puro
+      --text      : cor padrão do texto do site
+    ============================================================ */
+    :root {
+      --black:     #000000;
+      --bg:        #0D0D0D;
+      --red:       #CC0000;
+      --red-dark:  #8B0000;
+      --red-hover: #6B0000;
+      --silver:    #C0C0C0;
+      --silver-dk: #666666;
+      --gray-lt:   #1a1a1a;
+      --gray-card: #111111;
+      --white:     #ffffff;
+      --text:      #d0d0d0;
+    }
+
+    /* Rolagem suave ao clicar em links âncora (#secao) */
+    html { scroll-behavior: smooth; }
+
+    /* Estilo geral do corpo da página */
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Rajdhani', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden; /* impede rolagem horizontal indesejada */
+    }
+
+    /* ============================================================
+      TIPOGRAFIA — Classes reutilizáveis de texto
+      .display : títulos grandes em Cinzel (ex: "Sua academia no controle")
+      .label   : etiqueta pequena vermelha acima de seções (ex: "Funcionalidades")
+    ============================================================ */
+    .display {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      line-height: 1.1;
+    }
+
+    .label {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--red);
+      font-weight: 600;
+    }
+
+    /* ============================================================
+      NAVEGAÇÃO SUPERIOR (MENU)
+      Fica fixo no topo da tela enquanto o usuário rola a página.
+      Para alterar os links do menu: veja o HTML da <nav> abaixo.
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(13,13,13,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #1a1a1a;
+      padding: 0 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+
+    /* Logo no canto esquerdo do menu */
+    .nav-logo {
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.1em;
+      color: var(--silver);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--red); } /* o "✕" fica vermelho */
+
+    /* Links do menu (desktop) */
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a {
+      color: var(--silver-dk);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      letter-spacing: 0.05em;
+    }
+    .nav-links a:hover { color: var(--silver); }
+
+    /* ============================================================
+      MENU HAMBURGUER (aparece apenas em celulares)
+      As 3 linhas que viram um X ao abrir o menu mobile.
+    ============================================================ */
+    .nav-hamburger {
+      display: none; /* escondido no desktop */
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--silver);
+      transition: all 0.3s;
+    }
+    /* Animação do X ao abrir */
+    .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+    .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Menu expandido no mobile */
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      top: 64px; left: 0; right: 0;
+      background: rgba(13,13,13,0.98);
+      border-bottom: 1px solid #1a1a1a;
+      padding: 1.5rem 5vw;
+      flex-direction: column;
+      gap: 1.25rem;
+      z-index: 99;
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      color: var(--silver);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .nav-mobile a:last-child { border-bottom: none; }
+    /* Botão vermelho dentro do menu mobile */
+    .nav-mobile .btn-red-mobile {
+      background: var(--red-dark);
+      color: var(--white);
+      padding: 0.75rem 1.5rem;
+      text-align: center;
+      border-radius: 2px;
+      border-bottom: none;
+      margin-top: 0.5rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    /* ============================================================
+      BOTÕES
+      .btn         : estilo base compartilhado por todos os botões
+      .btn-red     : botão vermelho preenchido (ação principal)
+      .btn-outline : botão transparente com borda (ação secundária)
+
+      Para alterar o texto dos botões: veja o HTML de cada seção.
+      Para alterar cores: veja as variáveis --red-dark e --red-hover acima.
+    ============================================================ */
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-red { background: var(--red-dark); color: var(--white); }
+    .btn-red:hover { background: var(--red-hover); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--silver); border: 1px solid var(--silver-dk); }
+    .btn-outline:hover { border-color: var(--silver); color: var(--white); }
+
+    /* ============================================================
+      HERO — SEÇÃO PRINCIPAL (tela cheia ao entrar no site)
+      É a primeira coisa que o visitante vê.
+      Para editar o conteúdo: veja o HTML da section#hero abaixo.
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 5vw 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* Gradiente vermelho de fundo (efeito de luz) */
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 60%, rgba(139,0,0,0.18) 0%, transparent 70%),
+        radial-gradient(ellipse 80% 60% at 50% 100%, rgba(204,0,0,0.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    /* Elemento diagonal decorativo (traço de slash) */
+    .hero-slash {
+      position: absolute; inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .hero-slash::before {
+      content: '';
+      position: absolute;
+      top: -10%; left: -5%;
+      width: 55%; height: 130%;
+      background: linear-gradient(135deg, transparent 48%, rgba(204,0,0,0.04) 49%, rgba(204,0,0,0.04) 51%, transparent 52%);
+      transform: skewX(-8deg);
+    }
+    .hero-eyebrow { margin-bottom: 1.5rem; }
+    .hero-title {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      color: var(--white);
+      margin-bottom: 0.5rem;
+    }
+    .hero-title .slash-x { color: var(--red); display: inline-block; }
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--silver-dk);
+      max-width: 600px;
+      margin: 1.5rem auto 3rem;
+      font-weight: 400;
+    }
+    .hero-cta { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* Estatísticas de destaque abaixo dos botões do hero */
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      justify-content: center;
+      margin-top: 5rem;
+      flex-wrap: wrap;
+    }
+    .hero-stat-num {
+      font-family: 'Cinzel', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--red);
+      line-height: 1;
+    }
+    .hero-stat-label { font-size: 0.85rem; color: var(--silver-dk); margin-top: 0.3rem; }
+
+    /* ============================================================
+      PADRÕES DE SEÇÃO — estilos comuns a todas as seções
+      Cada <section> tem padding, título e subtítulo padronizados.
+    ============================================================ */
+    section { padding: 100px 5vw; }
+    .section-header { text-align: center; margin-bottom: 4rem; }
+    .section-title { font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin-top: 0.75rem; }
+    .section-sub { color: var(--silver-dk); margin-top: 1rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+    /* Traço vermelho decorativo abaixo dos títulos de seção */
+    .red-rule { width: 40px; height: 2px; background: var(--red); margin: 1.25rem auto 0; }
+
+    /* ============================================================
+      SEÇÃO "O PROBLEMA" — mostra as dores do dono de academia
+      Para alterar os cards de problema: veja o HTML da section#problem.
+      Cada card tem um ícone, título e descrição.
+    ============================================================ */
+    #problem { background: var(--gray-lt); border-top: 1px solid #1a1a1a; border-bottom: 1px solid #1a1a1a; }
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .problem-item {
+      padding: 2rem;
+      background: var(--black);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Barra vermelha à esquerda de cada card */
+    .problem-item::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: var(--red-dark);
+    }
+    .problem-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+    .problem-item h3 { color: var(--silver); font-size: 1rem; margin-bottom: 0.5rem; font-family: 'Cinzel', serif; font-weight: 700; }
+    .problem-item p { font-size: 0.875rem; color: var(--silver-dk); }
+
+    /* ============================================================
+      SEÇÃO "FUNCIONALIDADES" — grid de cards com os recursos do sistema
+      Para adicionar ou remover funcionalidades:
+        - Copie um bloco <div class="feat-card"> e cole dentro de .features-grid
+        - Altere o emoji, o título e a descrição
+    ============================================================ */
+    #features { background: var(--black); }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5px;
+      background: #1a1a1a;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .feat-card { background: var(--gray-card); padding: 2rem; position: relative; transition: background 0.2s; }
+    .feat-card:hover { background: #161616; }
+    .feat-icon { font-size: 1.8rem; margin-bottom: 1.25rem; display: block; }
+    .feat-card h3 { font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.05em; color: var(--silver); margin-bottom: 0.6rem; }
+    .feat-card p { font-size: 0.875rem; color: var(--silver-dk); line-height: 1.65; }
+    /* Badge "Alimenta a IA" no card de Presenças */
+    .feat-badge { display: inline-block; margin-top: 1rem; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--red); border: 1px solid var(--red-dark); padding: 0.2rem 0.5rem; font-family: 'Rajdhani', sans-serif; font-weight: 600; }
+
+    /* ============================================================
+      SEÇÃO "IA DE RETENÇÃO" — destaque da funcionalidade exclusiva Elite
+      Fundo degradê vermelho escuro para chamar atenção.
+    ============================================================ */
+    #ai-highlight {
+      background: linear-gradient(135deg, #0a0000 0%, #150000 50%, #0a0000 100%);
+      border-top: 1px solid #2a0000;
+      border-bottom: 1px solid #2a0000;
+      text-align: center;
+      padding: 100px 5vw;
+    }
+    .ai-icon { width: 80px; height: 80px; background: var(--red-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; font-size: 2rem; }
+    .ai-title { font-size: clamp(2rem, 4vw, 3.2rem); color: var(--white); margin-bottom: 1rem; }
+    .ai-title em { color: var(--red); font-style: normal; }
+    .ai-desc { max-width: 600px; margin: 0 auto 3rem; color: var(--silver-dk); font-size: 1.05rem; }
+    .ai-bullets { display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap; margin-bottom: 3rem; }
+    .ai-bullet { background: rgba(204,0,0,0.08); border: 1px solid rgba(204,0,0,0.2); padding: 1.25rem 1.75rem; text-align: left; max-width: 260px; }
+    .ai-bullet-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .ai-bullet h4 { font-size: 0.9rem; color: var(--silver); margin-bottom: 0.3rem; font-family: 'Cinzel', serif; }
+    .ai-bullet p { font-size: 0.8rem; color: var(--silver-dk); }
+
+    /* ============================================================
+      SEÇÃO "PLANOS E PREÇOS"
+      Para alterar os preços: veja também o JavaScript no final do arquivo,
+      na seção "TOGGLE MENSAL / ANUAL".
+      Para alterar os recursos de cada plano: edite as <li> dentro
+      de cada <ul class="plan-features">.
+    ============================================================ */
+    #pricing { background: var(--black); }
+
+    /* Bloco de destaque do trial — aparece ACIMA dos cards de plano */
+    .trial-cta-block {
+      background: #111111;
+      border: 1px solid #2a0000;
+      border-radius: 4px;
+      text-align: center;
+      padding: 2.5rem 2rem;
+      max-width: 620px;
+      margin: 0 auto 1.5rem;
+    }
+    .trial-cta-block h3 { font-family: 'Cinzel', serif; font-size: clamp(1.4rem, 3vw, 2rem); color: var(--white); margin-bottom: 0.5rem; }
+    .trial-cta-block .trial-sub { color: var(--silver-dk); font-size: 0.9rem; margin-bottom: 0.4rem; }
+    .trial-cta-block .trial-includes { color: var(--silver-dk); font-size: 0.82rem; margin-bottom: 1.5rem; }
+    .trial-cta-block .trial-includes strong { color: var(--silver); }
+
+    /* Frase explicativa antes do toggle */
+    .toggle-intro {
+      text-align: center;
+      color: var(--silver-dk);
+      font-size: 0.88rem;
+      margin-bottom: 1rem;
+      letter-spacing: 0.03em;
+    }
+    .toggle-intro strong { color: var(--red); }
+
+    /* Toggle mensal / anual */
+    .billing-toggle { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
+    .billing-toggle span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--silver-dk);
+      letter-spacing: 0.05em;
+      transition: color 0.2s, font-weight 0.2s;
+    }
+    .billing-toggle span.active {
+      color: var(--white);
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    /* Aparência do interruptor (toggle switch) */
+    .toggle-switch { position: relative; width: 48px; height: 26px; cursor: pointer; }
+    .toggle-switch input { display: none; }
+    .toggle-track { position: absolute; inset: 0; background: #1a1a1a; border: 1px solid #333; border-radius: 13px; transition: background 0.3s; }
+    .toggle-switch input:checked + .toggle-track { background: var(--red-dark); border-color: var(--red-dark); }
+    .toggle-thumb { position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; background: var(--silver); border-radius: 50%; transition: transform 0.3s; }
+    .toggle-switch input:checked ~ .toggle-thumb { transform: translateX(22px); }
+    /* Badge "2 meses grátis" que aparece no label Anual */
+    .annual-badge { display: inline-block; background: var(--red-dark); color: var(--white); font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.2rem 0.5rem; border-radius: 2px; margin-left: 0.4rem; vertical-align: middle; }
+
+    /* Grid dos 3 cards de plano */
+    .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2px; background: #1a1a1a; max-width: 960px; margin: 0 auto 3rem; }
+
+    /* Card de plano base */
+    .plan-card { background: var(--gray-card); padding: 2.5rem 2rem; display: flex; flex-direction: column; position: relative; }
+    /* Card PRO tem fundo um pouco mais escuro para se destacar */
+    .plan-card.featured { background: #0d0d0d; }
+    /* Badge "MAIS VENDIDO" no topo do card PRO */
+    .plan-card.featured::before {
+      content: 'MAIS VENDIDO';
+      position: absolute; top: 0; left: 50%;
+      transform: translateX(-50%);
+      background: var(--red-dark); color: var(--white);
+      font-family: 'Rajdhani', sans-serif; font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.15em; padding: 0.25rem 1rem; white-space: nowrap;
+    }
+    .plan-name { font-family: 'Cinzel', serif; font-size: 1.3rem; font-weight: 700; color: var(--silver); letter-spacing: 0.06em; margin-bottom: 0.25rem; margin-top: 0.75rem; }
+    .plan-limit { font-size: 0.85rem; color: var(--silver-dk); margin-bottom: 1.75rem; }
+    .plan-price { display: flex; align-items: flex-end; gap: 0.3rem; margin-bottom: 0.5rem; }
+    .plan-currency { font-size: 1.1rem; color: var(--silver-dk); margin-bottom: 0.3rem; }
+    /* O número do preço — alterado via JavaScript no toggle */
+    .plan-amount { font-family: 'Cinzel', serif; font-size: 3.5rem; font-weight: 700; color: var(--white); line-height: 1; transition: all 0.3s; }
+    .plan-period { font-size: 0.85rem; color: var(--silver-dk); margin-bottom: 0.4rem; }
+    /* Nota de cobrança anual — aparece só quando o toggle está em "Anual" */
+    .plan-annual-note { font-size: 0.78rem; color: var(--red); margin-bottom: 1.5rem; display: none; font-weight: 600; letter-spacing: 0.04em; border: 1px solid #2a0000; background: #0a0000; padding: 0.3rem 0.6rem; border-radius: 2px; display: none; }
+    .plan-features { list-style: none; flex: 1; margin-bottom: 2rem; margin-top: 1rem; }
+    .plan-features li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.9rem; color: var(--text); padding: 0.55rem 0; border-bottom: 1px solid #1a1a1a; }
+    .plan-features li:last-child { border-bottom: none; }
+    .plan-features .check { color: var(--red-dark); font-size: 0.85rem; margin-top: 0.15rem; flex-shrink: 0; }
+    .plan-cta { display: block; text-align: center; }
+    /* Nota de rodapé da seção de preços */
+    .pricing-note { text-align: center; color: var(--silver-dk); font-size: 0.85rem; max-width: 500px; margin: 0 auto; }
+    .pricing-note strong { color: var(--silver); }
+
+    /* ============================================================
+      SEÇÃO "PERGUNTAS FREQUENTES (FAQ)"
+      Para adicionar uma nova pergunta:
+        1. Copie um bloco <div class="faq-item"> completo
+        2. Cole dentro de <div class="faq-list">
+        3. Altere o texto da pergunta e da resposta
+    ============================================================ */
+    #faq { background: var(--gray-lt); }
+    .faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 2px; }
+    .faq-item { background: var(--black); border-left: 3px solid var(--red-dark); }
+    .faq-question {
+      width: 100%; background: none; border: none;
+      padding: 1.25rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      cursor: pointer; color: var(--silver);
+      font-family: 'Cinzel', serif; font-size: 0.9rem; font-weight: 700;
+      letter-spacing: 0.04em; text-align: left; transition: color 0.2s;
+    }
+    .faq-question:hover { color: var(--white); }
+    /* Seta que gira ao abrir a resposta */
+    .faq-icon { flex-shrink: 0; color: var(--red); font-size: 1rem; transition: transform 0.3s; }
+    .faq-question[aria-expanded="true"] .faq-icon { transform: rotate(180deg); }
+    .faq-answer { display: none; padding: 0 1.5rem 1.25rem; font-size: 0.9rem; color: var(--silver-dk); line-height: 1.7; }
+    .faq-answer.open { display: block; }
+
+    /* ============================================================
+      BANNER FINAL DE TRIAL — seção vermelha de conversão no fim da página
+      Para alterar: veja o HTML da section#trial abaixo.
+    ============================================================ */
+    #trial { background: var(--red-dark); padding: 80px 5vw; text-align: center; }
+    #trial h2 { font-size: clamp(2rem, 4vw, 3rem); color: var(--white); margin-bottom: 1rem; }
+    #trial p { color: rgba(255,255,255,0.75); margin-bottom: 2rem; font-size: 1rem; }
+    #trial .btn-white {
+      background: var(--white); color: var(--red-dark);
+      font-size: 1rem; padding: 1rem 2.5rem;
+      font-family: 'Rajdhani', sans-serif; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      text-decoration: none; border-radius: 2px;
+      display: inline-block; transition: background 0.2s;
+    }
+    #trial .btn-white:hover { background: var(--silver); }
+
+    /* ============================================================
+      RODAPÉ
+      Para alterar links e informações do rodapé:
+        veja o HTML do <footer> no final da página.
+      Para mudar o WhatsApp de contato:
+        altere o número em href="https://wa.me/55XXXXXXXXXXX"
+    ============================================================ */
+    footer {
+      background: var(--gray-lt);
+      border-top: 1px solid #1a1a1a;
+      padding: 3rem 5vw;
+      display: flex; flex-wrap: wrap; gap: 2rem;
+      align-items: center; justify-content: space-between;
+    }
+    .footer-logo { font-family: 'Cinzel', serif; font-size: 1.1rem; font-weight: 700; color: var(--silver); letter-spacing: 0.1em; text-decoration: none; }
+    .footer-logo span { color: var(--red); }
+    .footer-copy { font-size: 0.8rem; color: var(--silver-dk); }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { color: var(--silver-dk); text-decoration: none; font-size: 0.8rem; }
+    .footer-links a:hover { color: var(--silver); }
+
+    /* ============================================================
+      RESPONSIVIDADE — Ajustes para telas pequenas (celular)
+      Tudo abaixo de 640px de largura é considerado mobile.
+    ============================================================ */
+    @media (max-width: 640px) {
+      /* Esconde nav desktop, mostra hamburguer */
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+
+      /* Cards de preço empilhados verticalmente no mobile */
+      .pricing-grid { grid-template-columns: 1fr; gap: 2px; }
+      /* Start e Elite colapsados — apenas lista de features oculta */
+      .plan-card.collapsible .plan-features { display: none; }
+      .plan-card.collapsible.expanded .plan-features { display: block; }
+      /* PRO sempre expandido no mobile */
+      .plan-card.featured .plan-features { display: block !important; }
+      /* Botão "Ver detalhes" — só aparece no mobile */
+      .collapse-toggle {
+        display: block;
+        background: none; border: none;
+        color: var(--red);
+        font-family: 'Rajdhani', sans-serif;
+        font-size: 0.85rem; font-weight: 600;
+        letter-spacing: 0.08em; text-transform: uppercase;
+        cursor: pointer; padding: 0.5rem 0; margin-bottom: 1rem; text-align: left;
+      }
+
+      /* Rodapé centralizado no mobile */
+      footer { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; }
+    }
+    /* No desktop, o botão "Ver detalhes" fica escondido */
+    @media (min-width: 641px) {
+      .collapse-toggle { display: none; }
+      .plan-card.collapsible .plan-features { display: block !important; }
+    }
+
+    /* ============================================================
+      ANIMAÇÃO DE ENTRADA — elementos aparecem ao rolar a página
+      .fade-up       : elemento começa invisível, sobe ao aparecer
+      .fade-up.visible : estado final (visível) — ativado pelo JavaScript
+      Usuários com preferência de movimento reduzido veem sem animação.
+    ============================================================ */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.5s ease, transform 0.5s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+    BARRA DE NAVEGAÇÃO SUPERIOR (fixo no topo)
+    Para alterar os links: edite os <a href="..."> abaixo.
+    Para adicionar um link: copie uma linha <a> e cole antes do botão.
+    Os hrefs com # são âncoras que rolam para seções da página.
+  ============================================================ -->
+  <nav>
+    <a href="#hero" class="nav-logo">AXUS <span>✕</span> KOMBAT</a>
+    <div class="nav-links">
+      <a href="#features">Funcionalidades</a>
+      <a href="#pricing">Planos</a>
+      <a href="#faq">FAQ</a>
+      <!-- Botão principal do menu — leva para a página de cadastro/planos do sistema -->
+      <a href="/precos" class="btn btn-red" style="padding:0.5rem 1.25rem; font-size:0.85rem;">Testar grátis</a>
+    </div>
+    <!-- Botão hamburguer (só aparece no celular) -->
+    <button class="nav-hamburger" id="hamburger" aria-label="Abrir menu de navegação">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Menu expandido no celular — os links são os mesmos do menu desktop -->
+  <div class="nav-mobile" id="navMobile">
+    <a href="#features" onclick="closeMobileMenu()">Funcionalidades</a>
+    <a href="#pricing"  onclick="closeMobileMenu()">Planos</a>
+    <a href="#faq"      onclick="closeMobileMenu()">FAQ</a>
+    <a href="/precos" class="btn-red-mobile">Testar 14 dias grátis</a>
+  </div>
+
+
+  <!-- ============================================================
+    HERO — SEÇÃO PRINCIPAL
+    É a primeira coisa que o visitante vê ao entrar no site.
+    Para editar:
+      - Título principal: altere o texto dentro de <h1>
+      - Subtítulo: altere o texto do <p class="hero-subtitle">
+      - Estatísticas: altere os números e textos nos .hero-stat-*
+      - Botões: altere o href para onde cada botão deve levar
+  ============================================================ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-slash"></div>
+
+    <!-- Etiqueta acima do título -->
+    <div class="hero-eyebrow">
+      <span class="label">Sistema de gestão para academias de artes marciais</span>
+    </div>
+
+    <!-- Título principal -->
+    <h1 class="display hero-title">
+      Sua academia<br>no <span class="slash-x">controle</span>
+    </h1>
+
+    <!-- Subtítulo explicativo -->
+    <p class="hero-subtitle">
+      Gerencie alunos, mensalidades, presenças e graduações em um único lugar.
+      Pare de perder dinheiro com planilhas e cadernos.
+    </p>
+
+    <!-- Botões de ação principal -->
+    <div class="hero-cta">
+      <a href="/precos" class="btn btn-red">Testar 14 dias grátis</a>
+      <a href="#features" class="btn btn-outline">Ver funcionalidades</a>
+    </div>
+
+    <!-- Estatísticas de impacto — números que reforçam a credibilidade -->
+    <!-- Para alterar: mude o texto de .hero-stat-num e .hero-stat-label -->
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">14</div>
+        <div class="hero-stat-label">dias grátis, sem cartão</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">-40%</div>
+        <div class="hero-stat-label">inadimplência com cobranças automáticas*</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">R$79</div>
+        <div class="hero-stat-label">para começar</div>
+      </div>
+    </div>
+    <p style="font-size:0.7rem;color:var(--silver-dk);margin-top:1.5rem;opacity:0.6;">* estimativa baseada em uso de cobranças automáticas via WhatsApp</p>
+  </section>
+
+
+  <!-- ============================================================
+    SEÇÃO "O PROBLEMA"
+    Mostra as dores que o dono de academia sente hoje.
+    Para adicionar um problema: copie um bloco .problem-item e cole dentro de .problem-grid.
+    Para remover: apague o bloco .problem-item correspondente.
+  ============================================================ -->
+  <section id="problem">
+    <div class="section-header fade-up">
+      <span class="label">O problema</span>
+      <h2 class="display section-title">Você ainda gerencia assim?</h2>
+      <div class="red-rule"></div>
+    </div>
+    <div class="problem-grid">
+
+      <div class="problem-item fade-up">
+        <div class="problem-icon">📒</div>
+        <h3>Cadernos e planilhas</h3>
+        <p>Informação espalhada, sem controle real de quem pagou, quem faltou ou quem está prestes a sair.</p>
+      </div>
+
+      <div class="problem-item fade-up">
+        <div class="problem-icon">💸</div>
+        <h3>Inadimplência sem controle</h3>
+        <p>Cobranças feitas no grito, sem histórico e sem automação. Dinheiro que deveria entrar fica na memória.</p>
+      </div>
+
+      <div class="problem-item fade-up">
+        <div class="problem-icon">🚪</div>
+        <h3>Alunos saindo sem aviso</h3>
+        <p>Sem dados de presença, você só descobre que o aluno foi embora quando para de ver ele no tatame.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+    SEÇÃO "FUNCIONALIDADES"
+    Grid de cards mostrando o que o sistema oferece.
+    Para adicionar uma funcionalidade:
+      1. Copie um bloco <div class="feat-card fade-up"> completo
+      2. Cole dentro de <div class="features-grid">
+      3. Altere o emoji (.feat-icon), o título (<h3>) e a descrição (<p>)
+    Para remover: apague o bloco .feat-card correspondente.
+  ============================================================ -->
+  <section id="features">
+    <div class="section-header fade-up">
+      <span class="label">Funcionalidades</span>
+      <h2 class="display section-title">Tudo o que sua academia precisa</h2>
+      <p class="section-sub">Do cadastro do aluno ao fechamento do caixa — em uma única plataforma.</p>
+      <div class="red-rule"></div>
+    </div>
+
+    <div class="features-grid">
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">📊</span>
+        <h3>Dashboard</h3>
+        <p>Visão completa da academia em tempo real: alunos ativos, receita, inadimplência e os principais números para decisões rápidas.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">👥</span>
+        <h3>Gestão de Alunos</h3>
+        <p>Cadastro completo com dados pessoais, plano contratado, situação financeira, histórico de presenças e graduações.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">💰</span>
+        <h3>Financeiro</h3>
+        <p>Acompanhe pagamentos, identifique quem está em atraso e registre recebimentos com facilidade.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">📉</span>
+        <h3>Despesas</h3>
+        <p>Categorize todos os gastos da academia e veja para onde o dinheiro vai, aumentando o controle e a lucratividade.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">📋</span>
+        <h3>Planos</h3>
+        <p>Crie e gerencie os planos oferecidos — mensal, trimestral, anual, 2x por semana — com valores e regras personalizadas.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">🥋</span>
+        <h3>Modalidades</h3>
+        <p>Cadastre todas as modalidades: Jiu-Jitsu, Muay Thai, Boxe, Funcional, Karatê, Judo e muito mais.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">🗓️</span>
+        <h3>Grade de Horários</h3>
+        <p>Organize toda a grade de aulas semanais por modalidade. Crie, edite e remova horários com facilidade.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">✅</span>
+        <h3>Controle de Presenças</h3>
+        <p>Registre a presença dos alunos em cada treino. Os dados alimentam a IA de retenção, que identifica quem está em risco de abandono.</p>
+        <span class="feat-badge">Alimenta a IA</span>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">🏅</span>
+        <h3>Graduações</h3>
+        <p>Atribua faixas, acompanhe o histórico de graduações e veja o ranking dos praticantes mais graduados.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">📈</span>
+        <h3>Relatórios</h3>
+        <p>Indicadores completos com filtros por período: receitas, despesas, fluxo financeiro e desempenho da academia.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">🔔</span>
+        <h3>Notificações via WhatsApp</h3>
+        <p>Cobranças automáticas, lembretes de vencimento e comunicados direto no WhatsApp dos seus alunos.</p>
+      </div>
+
+      <div class="feat-card fade-up">
+        <span class="feat-icon">👨‍💼</span>
+        <h3>Gestão de Equipe</h3>
+        <p>Cadastre professores e recepcionistas definindo exatamente quais áreas do sistema cada pessoa pode acessar.</p>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+    SEÇÃO "IA DE RETENÇÃO"
+    Destaque exclusivo do plano Elite.
+    O botão "Ver plano Elite" aponta para o card Elite na seção de preços.
+  ============================================================ -->
+  <section id="ai-highlight">
+    <div class="ai-icon">🧠</div>
+    <span class="label">Exclusivo no plano Elite</span>
+    <h2 class="display ai-title" style="margin-top:0.75rem;">
+      IA que identifica alunos<br><em>antes de eles saírem</em>
+    </h2>
+    <p class="ai-desc">
+      O sistema analisa a frequência de cada aluno e emite alertas quando o padrão muda —
+      dando tempo de agir antes que a desistência aconteça.
+    </p>
+    <div class="ai-bullets">
+      <div class="ai-bullet">
+        <div class="ai-bullet-icon">📉</div>
+        <h4>Detecção de risco</h4>
+        <p>Identifica automaticamente alunos com queda de presença que indicam risco de abandono.</p>
+      </div>
+      <div class="ai-bullet">
+        <div class="ai-bullet-icon">💡</div>
+        <h4>Sugestões de ação</h4>
+        <p>Receba recomendações práticas de como abordar o aluno no momento certo.</p>
+      </div>
+      <div class="ai-bullet">
+        <div class="ai-bullet-icon">📊</div>
+        <h4>Relatórios estratégicos</h4>
+        <p>Visão consolidada da saúde de retenção da sua academia mês a mês.</p>
+      </div>
+    </div>
+    <!-- Aponta diretamente para o card Elite na seção de preços -->
+    <a href="#card-elite" class="btn btn-red">Ver plano Elite</a>
+  </section>
+
+
+  <!-- ============================================================
+    SEÇÃO "PLANOS E PREÇOS"
+    ATENÇÃO — Para alterar os preços dos planos:
+      1. Altere os valores em "prices" no JavaScript no final do arquivo
+      2. Altere também os textos em "annualNotes" no mesmo JavaScript
+      3. Atualize as notas de rodapé .pricing-note se necessário
+    Para alterar os recursos (features) de cada plano:
+      edite as <li> dentro de cada <ul class="plan-features">
+  ============================================================ -->
+  <section id="pricing">
+    <div class="section-header fade-up">
+      <span class="label">Planos e preços</span>
+      <h2 class="display section-title">Sem letras miúdas</h2>
+      <div class="red-rule"></div>
+    </div>
+
+    <!-- BLOCO DE TRIAL — aparece ACIMA dos cards para máxima visibilidade -->
+    <div class="trial-cta-block fade-up">
+      <h3>Teste 14 dias grátis no Plano Pro</h3>
+      <p class="trial-sub">Sem cartão de crédito. Cancele quando quiser.</p>
+      <!-- O que está incluso no trial para quem não conhece o Pro -->
+      <p class="trial-includes">
+        Inclui: <strong>WhatsApp automático · Cobranças automáticas · Relatórios avançados</strong> e muito mais
+      </p>
+      <a href="/precos" class="btn btn-red">Começar trial gratuito</a>
+    </div>
+
+    <!-- Frase explicativa antes do toggle (ajuda leigos a entenderem) -->
+    <p class="toggle-intro fade-up">
+      Escolha como prefere pagar — no plano anual você <strong>economiza 2 meses</strong>
+    </p>
+
+    <!-- TOGGLE MENSAL / ANUAL
+      Ao clicar, o JavaScript atualiza os preços de todos os cards automaticamente.
+      Não precisa alterar este HTML — os preços são controlados pelo JavaScript abaixo.
+    -->
+    <div class="billing-toggle fade-up">
+      <span class="active" id="label-monthly">Mensal</span>
+      <label class="toggle-switch" aria-label="Alternar entre cobrança mensal e anual">
+        <input type="checkbox" id="billingToggle" role="switch" aria-checked="false">
+        <div class="toggle-track"></div>
+        <div class="toggle-thumb"></div>
+      </label>
+      <span id="label-annual">
+        Anual
+        <span class="annual-badge" id="saveBadge" style="display:none;">2 meses grátis</span>
+      </span>
+    </div>
+
+    <!-- GRID DOS 3 CARDS DE PLANO -->
+    <div class="pricing-grid">
+
+      <!-- CARD START -->
+      <!-- No mobile, este card começa colapsado (apenas Pro fica expandido) -->
+      <div class="plan-card collapsible fade-up" id="card-start">
+        <div class="plan-name">Kombat Start</div>
+        <div class="plan-limit">Até 50 alunos · 1 usuário</div>
+        <div class="plan-price">
+          <span class="plan-currency">R$</span>
+          <span class="plan-amount" id="price-start">79</span>
+          <span class="plan-period" id="period-start">/mês</span>
+        </div>
+        <!-- Nota de cobrança anual — aparece via JavaScript quando toggle = Anual -->
+        <div class="plan-annual-note" id="note-start">R$790 cobrado uma vez por ano</div>
+        <!-- Botão "Ver detalhes" — só aparece no celular -->
+        <button class="collapse-toggle" onclick="toggleCard('card-start', this)">Ver detalhes ▾</button>
+        <ul class="plan-features">
+          <li><span class="check">✦</span> Cadastro de alunos, planos e horários</li>
+          <li><span class="check">✦</span> Controle de mensalidades e despesas</li>
+          <li><span class="check">✦</span> Histórico de graduações</li>
+          <li><span class="check">✦</span> Controle de presença / check-in</li>
+          <li><span class="check">✦</span> Portal do Aluno</li>
+          <li><span class="check">✦</span> Dashboard financeiro</li>
+          <li><span class="check">✦</span> Relatórios básicos</li>
+          <li><span class="check">✦</span> WhatsApp automático (30 mensagens/mês)</li>
+          <li><span class="check">✦</span> Suporte por e-mail</li>
+        </ul>
+        <a href="/precos" class="btn btn-outline plan-cta">Começar agora</a>
+      </div>
+
+      <!-- CARD PRO — destaque visual (badge "Mais Vendido" + fundo mais escuro) -->
+      <!-- No mobile, este card aparece primeiro e expandido por padrão -->
+      <div class="plan-card featured fade-up" id="card-pro">
+        <div class="plan-name">Kombat Pro</div>
+        <div class="plan-limit">Até 150 alunos · 5 usuários</div>
+        <div class="plan-price">
+          <span class="plan-currency">R$</span>
+          <span class="plan-amount" id="price-pro">99</span>
+          <span class="plan-period" id="period-pro">/mês</span>
+        </div>
+        <div class="plan-annual-note" id="note-pro">R$990 cobrado uma vez por ano</div>
+        <ul class="plan-features">
+          <li><span class="check">✦</span> Tudo do Start, mais:</li>
+          <li><span class="check">✦</span> WhatsApp automático (300 mensagens/mês)</li>
+          <li><span class="check">✦</span> Cobranças automáticas e lembretes de vencimento</li>
+          <li><span class="check">✦</span> Relatórios avançados + exportação CSV</li>
+          <li><span class="check">✦</span> Ranking de inadimplência</li>
+          <li><span class="check">✦</span> Controle de frequência avançado</li>
+          <li><span class="check">✦</span> Pausar e reativar contratos</li>
+          <li><span class="check">✦</span> Dashboard de ocupação das turmas</li>
+          <li><span class="check">✦</span> Alertas automáticos de baixa frequência</li>
+          <li><span class="check">✦</span> Suporte prioritário</li>
+        </ul>
+        <a href="/precos" class="btn btn-red plan-cta">Testar 14 dias grátis</a>
+      </div>
+
+      <!-- CARD ELITE -->
+      <!-- id="card-elite" é usado pelo botão "Ver plano Elite" da seção de IA -->
+      <div class="plan-card collapsible fade-up" id="card-elite">
+        <div class="plan-name">Kombat Elite</div>
+        <div class="plan-limit">Alunos e usuários ilimitados</div>
+        <div class="plan-price">
+          <span class="plan-currency">R$</span>
+          <span class="plan-amount" id="price-elite">149</span>
+          <span class="plan-period" id="period-elite">/mês</span>
+        </div>
+        <div class="plan-annual-note" id="note-elite">R$1.490 cobrado uma vez por ano</div>
+        <button class="collapse-toggle" onclick="toggleCard('card-elite', this)">Ver detalhes ▾</button>
+        <ul class="plan-features">
+          <li><span class="check">✦</span> Tudo do Pro, mais:</li>
+          <li><span class="check">✦</span> WhatsApp praticamente ilimitado</li>
+          <li><span class="check">✦</span> Comunicação em massa segmentada</li>
+          <li><span class="check">✦</span> Personalização completa da identidade visual</li>
+          <li><span class="check">✦</span> Portal do Aluno personalizado</li>
+          <li><span class="check">✦</span> <strong style="color:var(--red)">IA de retenção</strong> — identifica alunos em risco + sugestões</li>
+          <li><span class="check">✦</span> Relatórios estratégicos</li>
+          <li><span class="check">✦</span> Onboarding individual</li>
+          <li><span class="check">✦</span> Suporte direto via WhatsApp</li>
+          <li><span class="check">✦</span> Acesso antecipado a novos recursos</li>
+          <li><span class="check">✦</span> Futuro módulo Multi-Unidade</li>
+        </ul>
+        <a href="/precos" class="btn btn-outline plan-cta">Começar agora</a>
+      </div>
+
+    </div><!-- fim .pricing-grid -->
+
+    <!-- Nota de rodapé com resumo do plano anual -->
+    <p class="pricing-note fade-up">
+      Plano anual: <strong>2 meses grátis</strong> —
+      Start R$790/ano · Pro R$990/ano · Elite R$1.490/ano
+    </p>
+  </section>
+
+
+  <!-- ============================================================
+    SEÇÃO "PERGUNTAS FREQUENTES (FAQ)"
+    Para adicionar uma nova pergunta:
+      1. Copie o bloco <div class="faq-item"> abaixo
+      2. Cole dentro de <div class="faq-list">
+      3. Altere o texto da .faq-question e do .faq-answer
+    O accordion (abrir/fechar) é controlado pelo JavaScript abaixo.
+  ============================================================ -->
+  <section id="faq">
+    <div class="section-header fade-up">
+      <span class="label">Dúvidas frequentes</span>
+      <h2 class="display section-title">Perguntas e respostas</h2>
+      <div class="red-rule"></div>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          Posso cancelar a qualquer momento?
+          <span class="faq-icon">▾</span>
+        </button>
+        <div class="faq-answer">
+          Sim. Não há fidelidade nem multa. Se você cancelar, o acesso continua até o fim do período já pago. Sem burocracia.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          Preciso saber de tecnologia para usar?
+          <span class="faq-icon">▾</span>
+        </button>
+        <div class="faq-answer">
+          Não. O Axus Kombat foi criado para donos de academia, não para técnicos. A interface é simples e o onboarding guia você passo a passo. No plano Elite, você ainda conta com suporte individual de configuração.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          O suporte é em português?
+          <span class="faq-icon">▾</span>
+        </button>
+        <div class="faq-answer">
+          Sim, 100% em português brasileiro. Suporte por e-mail (Start), canal prioritário (Pro) e WhatsApp direto (Elite). Desenvolvido no Brasil, para academias brasileiras.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          Funciona pelo celular?
+          <span class="faq-icon">▾</span>
+        </button>
+        <div class="faq-answer">
+          Sim. O sistema é totalmente responsivo — funciona em qualquer navegador de celular, tablet ou computador. Não é necessário instalar aplicativo.
+        </div>
+      </div>
+
+      <div class="faq-item fade-up">
+        <button class="faq-question" onclick="toggleFaq(this)" aria-expanded="false">
+          O que acontece quando o trial de 14 dias termina?
+          <span class="faq-icon">▾</span>
+        </button>
+        <div class="faq-answer">
+          Você recebe um aviso antes do fim do trial e pode escolher o plano ideal para sua academia. Se não assinar, o acesso é suspenso e seus dados ficam guardados por 30 dias — sem perdas.
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+    BANNER FINAL DE CONVERSÃO
+    Seção vermelha no fim da página para capturar quem chegou até aqui.
+    Para alterar: edite o título <h2>, o parágrafo <p> e o link do botão.
+  ============================================================ -->
+  <section id="trial">
+    <h2 class="display">14 dias grátis.<br>Sem cartão de crédito.</h2>
+    <p>Experimente o Kombat Pro completo e veja o que sua academia estava perdendo.</p>
+    <a href="/precos" class="btn-white">Criar conta gratuita</a>
+  </section>
+
+
+  <!-- ============================================================
+    RODAPÉ
+    Para alterar:
+      - WhatsApp de contato: mude o número em href="https://wa.me/55XXXXXXXXXXX"
+      - Links de Termos e Privacidade: substitua o # pelo link real quando tiver
+      - Ano do copyright: atualize o número quando virar o ano
+      - Nome da empresa: altere "Núcleo Tech" se necessário
+  ============================================================ -->
+  <footer>
+    <a href="#hero" class="footer-logo">AXUS <span>✕</span> KOMBAT</a>
+    <div class="footer-copy">© 2026 Núcleo Tech. Todos os direitos reservados.</div>
+    <div class="footer-links">
+      <!-- Deixe href="#" até criar as páginas de Termos e Privacidade -->
+      <a href="#">Termos de uso</a>
+      <a href="#">Privacidade</a>
+      <!-- Altere o número abaixo para o WhatsApp de contato da sua empresa -->
+      <a href="https://wa.me/5588992770045" target="_blank" rel="noopener">Contato via WhatsApp</a>
+    </div>
+  </footer>
+
+
+  <script>
+    /* ============================================================
+      JAVASCRIPT — COMPORTAMENTOS INTERATIVOS DA PÁGINA
+      Cada bloco abaixo tem um comentário explicando o que faz.
+    ============================================================ */
+
+
+    /* ============================================================
+      ANIMAÇÃO DE ENTRADA (SCROLL FADE)
+      Faz os elementos aparecerem suavemente ao rolar a página.
+      Elementos com class="fade-up" ficam invisíveis até entrarem
+      na tela, então surgem com animação de baixo para cima.
+      Não precisa alterar este bloco.
+    ============================================================ */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+
+    /* ============================================================
+      MENU HAMBURGUER (CELULAR)
+      Abre e fecha o menu mobile ao clicar no botão de 3 linhas.
+      Também fecha o menu ao clicar fora dele.
+    ============================================================ */
+    const hamburger  = document.getElementById('hamburger');
+    const navMobile  = document.getElementById('navMobile');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      navMobile.classList.toggle('open');
+    });
+
+    /* Fecha o menu mobile ao clicar em um link */
+    function closeMobileMenu() {
+      hamburger.classList.remove('open');
+      navMobile.classList.remove('open');
+    }
+
+    /* Fecha o menu mobile ao clicar fora da área do menu */
+    document.addEventListener('click', (e) => {
+      if (!hamburger.contains(e.target) && !navMobile.contains(e.target)) {
+        closeMobileMenu();
+      }
+    });
+
+
+    /* ============================================================
+      TOGGLE MENSAL / ANUAL — atualiza os preços dos cards
+      PARA ALTERAR OS PREÇOS:
+        - "monthly": preços mensais normais
+        - "annual" : preços equivalentes por mês no plano anual
+                     (ex: R$990/ano ÷ 12 = R$82,50 → arredondado para R$83)
+      PARA ALTERAR AS NOTAS DE COBRANÇA ANUAL:
+        - "annualNotes": texto exibido abaixo do preço quando anual
+    ============================================================ */
+    const toggle       = document.getElementById('billingToggle');
+    const labelMonthly = document.getElementById('label-monthly');
+    const labelAnnual  = document.getElementById('label-annual');
+    const saveBadge    = document.getElementById('saveBadge');
+
+    /* ── ALTERE OS PREÇOS AQUI ── */
+    const prices = {
+      monthly: { start: '79',  pro: '99',  elite: '149' },
+      annual:  { start: '66',  pro: '83',  elite: '124' }
+    };
+
+    /* ── ALTERE AS NOTAS DE COBRANÇA ANUAL AQUI ── */
+    const annualNotes = {
+      start: 'R$790 cobrado uma vez por ano',
+      pro:   'R$990 cobrado uma vez por ano',
+      elite: 'R$1.490 cobrado uma vez por ano'
+    };
+
+    toggle.addEventListener('change', () => {
+      const isAnnual = toggle.checked;
+      const mode     = isAnnual ? 'annual' : 'monthly';
+
+      /* Atualiza aria-checked para acessibilidade de leitores de tela */
+      toggle.setAttribute('aria-checked', isAnnual ? 'true' : 'false');
+
+      /* Atualiza cada card com o novo preço e período */
+      ['start', 'pro', 'elite'].forEach(plan => {
+        document.getElementById(`price-${plan}`).textContent  = prices[mode][plan];
+        const periodEl = document.getElementById(`period-${plan}`);
+        /* No anual: mostra "/mês equivalente" para deixar claro que é cobrança anual */
+        periodEl.textContent = isAnnual ? '/mês equiv.' : '/mês';
+        const note = document.getElementById(`note-${plan}`);
+        note.style.display = isAnnual ? 'block' : 'none';
+        if (isAnnual) note.textContent = annualNotes[plan];
+      });
+
+      /* Atualiza destaque dos labels Mensal / Anual */
+      labelMonthly.classList.toggle('active', !isAnnual);
+      labelAnnual.classList.toggle('active', isAnnual);
+      saveBadge.style.display = isAnnual ? 'inline-block' : 'none';
+    });
+
+
+    /* ============================================================
+      ACCORDION DO FAQ — abre e fecha as respostas
+      Ao clicar em uma pergunta, a resposta é exibida.
+      Clicar na mesma pergunta fecha a resposta.
+      Abrir outra pergunta fecha a anterior automaticamente.
+    ============================================================ */
+    function toggleFaq(btn) {
+      const answer = btn.nextElementSibling;
+      const isOpen = answer.classList.contains('open');
+
+      /* Fecha todas as respostas abertas */
+      document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+      document.querySelectorAll('.faq-question').forEach(b => b.setAttribute('aria-expanded', 'false'));
+
+      /* Se estava fechado, abre o clicado */
+      if (!isOpen) {
+        answer.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
+
+    /* ============================================================
+      COLLAPSE DOS CARDS NO MOBILE
+      No celular, os cards Start e Elite começam colapsados.
+      O card Pro fica expandido por padrão.
+      Ao clicar em "Ver detalhes", o card expande.
+    ============================================================ */
+    function toggleCard(cardId, btn) {
+      const card       = document.getElementById(cardId);
+      const isExpanded = card.classList.contains('expanded');
+      card.classList.toggle('expanded', !isExpanded);
+      btn.textContent  = isExpanded ? 'Ver detalhes ▾' : 'Ocultar detalhes ▴';
+    }
+
+  </script>
+</body>
+</html>
